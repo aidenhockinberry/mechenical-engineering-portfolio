@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aiden Hockinberry | Mechanical Engineering & Prototyping Portfolio</title>
+  <meta name="description" content="Mechanical Engineering Portfolio of Aiden Hockinberry. Showcasing physical prototypes, virtual physics simulations, 70+ piston engines, CAD modeling, and 3D printed mechatronics.">
+  <meta name="keywords" content="Aiden Hockinberry, Mechanical Engineering, Portfolio, CAD, Fusion 360, 3D Printing, Robotics, Kinematics, Piston Engines">
+  <meta name="author" content="Aiden Hockinberry">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" id="nav-brand-logo">
+        <div class="logo-badge">AH</div>
+        <div class="brand-text">
+          <span class="brand-name">Aiden Hockinberry</span>
+          <span class="brand-sub">Mechanical Engineering</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#early-era" class="nav-link">Early Era</a></li>
+        <li><a href="#virtual-era" class="nav-link">Virtual Era</a></li>
+        <li><a href="#manufacturing-era" class="nav-link">3D Printing Era</a></li>
+        <li><a href="#simulator" class="nav-link">Kinematics Lab</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-icon-only" id="themeToggleBtn" title="Toggle Blueprint / Dark Theme" aria-label="Toggle Theme">
+          <span id="themeIcon">☀️</span>
+        </button>
+        <button class="btn btn-outline" id="pdfViewerBtn" title="View Original PDF Pages">
+          <span>📄 View PDF Pages</span>
+        </button>
+        <a href="#contact" class="btn btn-primary">
+          <span>Get in Touch</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>SYSTEM STATUS: ACTIVE PROTOTYPING & ENGINEERING</span>
+          </div>
+
+          <h1 class="hero-title">
+            Mechanical Engineering <br>
+            <span class="hero-title-accent">Built From The Ground Up</span>
+          </h1>
+
+          <div class="hero-quote">
+            “I have been doing Mechanical Engineering my whole life.”
+          </div>
+
+          <p class="hero-bio">
+            I’m a student who loves building, solving complex kinematic problems, and creating physical and virtual mechanisms that make life easier. My passion for machines started with hands-on physical assemblies and has evolved across real-time physics engines, digital twin simulations, CAD design in Fusion 360, and precision additive manufacturing.
+          </p>
+
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-val" id="metric-engines">70+</span>
+              <span class="metric-label">Piston Engines</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val orange" id="metric-escapements">14+</span>
+              <span class="metric-label">Escapement CADs</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" id="metric-dv">9,243</span>
+              <span class="metric-label">m/s Orbital ΔV</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val emerald" id="metric-tolerance">0.22mm</span>
+              <span class="metric-label">FDM Air Gap</span>
+            </div>
+          </div>
+
+          <div class="hero-cta">
+            <a href="#early-era" class="btn btn-primary">Explore Engineering Journey</a>
+            <a href="#simulator" class="btn btn-accent">⚡ Open Kinematics Lab</a>
+            <a href="mailto:aidenhockinberry@gmail.com" class="btn btn-outline">aidenhockinberry@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="hero-visual-wrapper">
+          <div class="hero-card">
+            <div class="hero-portrait-frame">
+              <img src="assets/images/p1_img3_491.jpeg" alt="Aiden Hockinberry - Mechanical Engineering" class="hero-portrait-img" id="heroPortraitImg">
+              <div class="hero-badge-overlay">
+                <div>
+                  <div class="overlay-title">Aiden Hockinberry</div>
+                  <div class="overlay-sub">Mechanical Engineer & Systems Builder</div>
+                </div>
+                <div class="overlay-indicator">
+                  <span>●</span> <span>(614) 632-6111</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Era & Discipline Filter Bar -->
+  <section class="filter-section" id="filter-bar">
+    <div class="container">
+      <div class="filter-wrapper">
+        <div class="era-tabs">
+          <button class="era-tab active" data-era="all">🚀 All Projects (12)</button>
+          <button class="era-tab" data-era="early">⚙️ Era 1: Physical Foundations</button>
+          <button class="era-tab" data-era="virtual">🌌 Era 2: Virtual Simulation & Digital Twins</button>
+          <button class="era-tab" data-era="manufacturing">🖨️ Era 3: 3D Printing & Mechatronics</button>
+        </div>
+
+        <div class="discipline-filters">
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); margin-right: 0.3rem;">DISCIPLINE:</span>
+          <button class="discipline-btn active" data-discipline="all">All Disciplines</button>
+          <button class="discipline-btn" data-discipline="kinematics">Kinematics & Linkages</button>
+          <button class="discipline-btn" data-discipline="cad">CAD & 3D Modeling</button>
+          <button class="discipline-btn" data-discipline="aerospace">Aerospace / Orbital</button>
+          <button class="discipline-btn" data-discipline="electromechanical">Electromechanical</button>
+          <button class="discipline-btn" data-discipline="logic">Robotics & Digital Logic</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <!-- =====================================================================
+         ERA 1: EARLY PHYSICAL PROTOTYPING
+         ===================================================================== -->
+    <section class="section era-section-group" id="early-era" data-era-group="early">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>01 // THE EARLY ERA</span>
+        </div>
+        <h2 class="section-title">Physical Prototyping & Kinematic Foundations</h2>
+        <p class="section-desc">
+          Hands-on tactile exploration in gear ratios, structural rigidity, torque balance, and dynamic equilibrium. Building functional proof-of-concept machines from raw structural components.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Project 1: Linear Transport System -->
+        <article class="project-card project-card-featured" data-era="early" data-discipline="kinematics">
+          <div class="card-top-bar">
+            <span class="era-badge">Early Era Prototype</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Synchronized Motors</span>
+              <span class="tech-tag">Belt Drive</span>
+              <span class="tech-tag">Load Balancing</span>
+              <span class="tech-tag">Technic Chassis</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="project-img-wrapper" onclick="openLightbox('assets/images/p2_img1_497.png', 'Linear Transport System Prototype - Aiden Hockinberry testing synchronized dual-motor belt assembly')">
+                <img src="assets/images/p2_img1_497.png" alt="Linear Transport System Prototype" class="project-img">
+                <button class="img-inspect-btn">🔍 Zoom Blueprint & Build</button>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Linear Transport System Prototype</h3>
+              <p class="project-summary">
+                Designed a heavy-duty linear transport carriage utilizing a dual-motor synchronized drive to balance load distribution across track guide beams. Focused on structural rigidity during high-cycle dynamic reversals.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Key Technical Features</div>
+                  <ul class="spec-list">
+                    <li><strong>Dual Motor Drive System:</strong> Synchronized high-torque motors for balanced power distribution and reduced belt slippage.</li>
+                    <li><strong>Reinforced Chassis Design:</strong> Robust Technic beam structure designed to minimize vibration during high-cycle load reversals.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Challenges & Solutions</div>
+                  <ul class="spec-list">
+                    <li><strong>Challenge:</strong> Initial belt tension issues causing dynamic instability and tooth jumping.</li>
+                    <li><strong>Solution:</strong> Iterated pulley and track configurations to optimize traction and alignment under varying loads.</li>
+                    <li><strong>Inertia Management:</strong> Implemented structural cross-bracing and a tuned gear-train to absorb kinetic energy.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Mechanical Logic Exploration -->
+        <article class="project-card" data-era="early" data-discipline="logic kinematics">
+          <div class="card-top-bar">
+            <span class="era-badge">Early Era Prototype</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Mechanical Linkages</span>
+              <span class="tech-tag">Rotary-to-Linear</span>
+              <span class="tech-tag">Gear Trains</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="project-img-wrapper" onclick="openLightbox('assets/images/p3_img2_504.png', 'Mechanical Logic Exploration - Linkages, gear alignment, and spatial motion translation')">
+                <img src="assets/images/p3_img2_504.png" alt="Mechanical Logic Exploration" class="project-img">
+                <button class="img-inspect-btn">🔍 Inspect Linkage Assembly</button>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Mechanical Logic & Linkage Exploration</h3>
+              <p class="project-summary">
+                Investigating spatial motion translation and mechanical timing through interconnected gear linkages. These foundational hands-on builds established intuition for gear backlash, mechanical advantage, and non-binding pivot kinematics.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Core Principles</div>
+                  <ul class="spec-list">
+                    <li><strong>Motion Conversion:</strong> Transforming continuous rotational inputs into reciprocating mechanical output strokes.</li>
+                    <li><strong>Friction Mitigation:</strong> Pin tolerance alignment and reduction of multi-pivot parasitic drag.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Engineering Takeaways</div>
+                  <ul class="spec-list">
+                    <li>Developed an early hands-on sense of tolerance budgeting and physical constraints that later drove high-precision CAD modeling.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Self-Stabilizing Dynamic Rolling Structure -->
+        <article class="project-card" data-era="early" data-discipline="kinematics cad">
+          <div class="card-top-bar">
+            <span class="era-badge">Early Era Prototype</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Rotational Inertia</span>
+              <span class="tech-tag">Dynamic Symmetry</span>
+              <span class="tech-tag">Wireframe CAD</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p4_img2_510.jpeg', 'Self-Stabilizing Dynamic Rolling Structure - Physical Build with Aiden')">
+                  <img src="assets/images/p4_img2_510.jpeg" alt="Dynamic Rolling Structure Physical" class="project-img">
+                  <button class="img-inspect-btn">🔍 Physical</button>
+                </div>
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p4_img4_512.png', 'Self-Stabilizing Dynamic Rolling Structure - 3D Wireframe CAD Geometry')">
+                  <img src="assets/images/p4_img4_512.png" alt="Dynamic Rolling Structure CAD" class="project-img">
+                  <button class="img-inspect-btn">🔍 3D CAD</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Self-Stabilizing Dynamic Rolling Structure</h3>
+              <p class="project-summary">
+                Conceived and engineered a large-scale self-stabilizing rolling ring structure. By distributing radial structural truss members symmetrically around a central hub, the mechanism maintains rotational momentum and self-rights under dynamic perturbation.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Structural Dynamics</div>
+                  <ul class="spec-list">
+                    <li><strong>Radial Truss Geometry:</strong> Multi-point radial spoke network providing high torsional stiffness against lateral roll forces.</li>
+                    <li><strong>Gyroscopic Tendency:</strong> Perimeter mass concentration maximizing moment of inertia ($I = m r^2$).</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Digital-Physical Bridge</div>
+                  <ul class="spec-list">
+                    <li>Modeled in 3D wireframe space to verify angular symmetry before physical assembly with modular structural struts.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         ERA 2: THE VIRTUAL ERA & DIGITAL TWINS
+         ===================================================================== -->
+    <section class="section era-section-group" id="virtual-era" data-era-group="virtual">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>02 // THE VIRTUAL ERA</span>
+        </div>
+        <h2 class="section-title">Engineering Beyond Physical Constraints & Digital Twins</h2>
+        <p class="section-desc">
+          Transitioning from physical parts to high-fidelity physics engines (Kerbal Space Program, Scrap Mechanic, modded Minecraft). Using virtual sandboxes as real-time dynamic CAD testbeds to validate kinematics, orbital trajectory staging, and multi-axis logic loops prior to physical fabrication.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Project 4: 70+ Piston Engine Iteration Lab -->
+        <article class="project-card project-card-featured" data-era="virtual" data-discipline="cad kinematics">
+          <div class="card-top-bar">
+            <span class="era-badge virtual">Virtual Prototyping</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">70+ Engine Builds</span>
+              <span class="tech-tag">Torque Optimization</span>
+              <span class="tech-tag">Crankshaft Balancing</span>
+              <span class="tech-tag">Timing Cam Tuning</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="engine-gallery-grid" id="engineGalleryGrid">
+                <!-- 27 Engine CAD thumbnails rendered via JavaScript -->
+              </div>
+              <p style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-align: center;">
+                Click any engine block to inspect in high-resolution CAD lightbox (27 detailed variants shown).
+              </p>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Virtual Prototyping: 70+ Piston Engine Iterations</h3>
+              <p class="project-summary">
+                Utilized real-time physics engines as a dynamic mechanical testing sandbox to design, construct, and stress-test over <strong>70 custom piston engine configurations</strong>. Iterated across inline, radial, V-type, and boxer layouts to maximize torque output, optimize ignition timing efficiency, and eliminate crankshaft torsional resonance.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Engineering Focus</div>
+                  <ul class="spec-list">
+                    <li><strong>Crankshaft Phase Shifts:</strong> Calibrating offset throw angles to maintain continuous power delivery and reduce vibration harmonics.</li>
+                    <li><strong>Valve & Timing Sequences:</strong> Engineering intake/exhaust phase timing to maximize stroke displacement and cylinder volumetric efficiency.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Simulation As Rapid Prototyping</div>
+                  <ul class="spec-list">
+                    <li>Identified structural fatigue points and bearing stress tolerances in milliseconds without material fabrication waste, mirroring industry Digital Twin workflows.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: Mechanical Automotive Design -->
+        <article class="project-card" data-era="virtual" data-discipline="cad kinematics">
+          <div class="card-top-bar">
+            <span class="era-badge virtual">Virtual Automotive CAD</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Piston Drivetrain</span>
+              <span class="tech-tag">Double Wishbone Suspension</span>
+              <span class="tech-tag">Universal Joints</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="cad-viewer-container">
+                <div class="cad-view-controls">
+                  <button class="cad-view-btn active" data-view="front" data-src="assets/images/p7_img3_554.png">FRONT VIEW</button>
+                  <button class="cad-view-btn" data-view="back" data-src="assets/images/p7_img2_553.png">BACK VIEW</button>
+                  <button class="cad-view-btn" data-view="side" data-src="assets/images/p7_img4_556.png">SIDE (ENGINE)</button>
+                  <button class="cad-view-btn" data-view="detail" data-src="assets/images/p7_img5_557.png">U-JOINT & SUSPENSION</button>
+                </div>
+                <div class="cad-display-frame" onclick="openActiveCadLightbox()">
+                  <img src="assets/images/p7_img3_554.png" alt="Mechanical Automotive Design CAD" class="cad-display-img" id="autoCadImg">
+                  <button class="img-inspect-btn">🔍 View Full CAD</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Mechanical Automotive Chassis & Drivetrain</h3>
+              <p class="project-summary">
+                Engineered a complete vehicle chassis integrating a central custom piston engine, independent suspension linkages, and universal joint drive shafts. Designed to test torque transfer during uneven terrain deflection.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Sub-System Architecture</div>
+                  <ul class="spec-list">
+                    <li><strong>Universal Joint Transmission:</strong> Accommodates angular displacement between the differential and wheel hubs under suspension travel.</li>
+                    <li><strong>Independent Damped Suspension:</strong> Geometry optimized to minimize body roll and keep tires planted.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Kinematic Analysis</div>
+                  <ul class="spec-list">
+                    <li>Validated steering knuckle kingpin inclination and Ackerman steering geometry under dynamic wheel turn loads.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Simulated Mun Mission (KSP) Case Study -->
+        <article class="project-card project-card-featured" data-era="virtual" data-discipline="aerospace">
+          <div class="card-top-bar">
+            <span class="era-badge virtual">Aerospace & Orbital Case Study</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Kerbal Space Program</span>
+              <span class="tech-tag">5-Stage Rocket</span>
+              <span class="tech-tag">ΔV Budget: 9,243 m/s</span>
+              <span class="tech-tag">Orbital Staging</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="rocket-stages-layout">
+                <div class="stage-buttons">
+                  <button class="stage-btn active" data-stage="1" data-img="assets/images/p8_img3_569.jpeg">
+                    <span class="stage-name">1. Ascent Stage (SRB)</span>
+                    <span class="stage-dv">TWR > 1.8</span>
+                  </button>
+                  <button class="stage-btn" data-stage="2" data-img="assets/images/p8_img3_569.jpeg">
+                    <span class="stage-name">2. Booster Core</span>
+                    <span class="stage-dv">Gravity Turn</span>
+                  </button>
+                  <button class="stage-btn" data-stage="3" data-img="assets/images/p8_img6_573.png">
+                    <span class="stage-name">3. Trans-Munar (TMI)</span>
+                    <span class="stage-dv">Max Vac Isp</span>
+                  </button>
+                  <button class="stage-btn" data-stage="4" data-img="assets/images/p9_img1_578.jpeg">
+                    <span class="stage-name">4. Munar Lander</span>
+                    <span class="stage-dv">Landing Legs</span>
+                  </button>
+                  <button class="stage-btn" data-stage="5" data-img="assets/images/p9_img2_579.png">
+                    <span class="stage-name">5. Command & Recovery</span>
+                    <span class="stage-dv">Parachutes</span>
+                  </button>
+                </div>
+
+                <div class="project-img-wrapper" id="rocketStageImgWrapper" onclick="openActiveStageLightbox()">
+                  <img src="assets/images/p8_img3_569.jpeg" alt="Rocket Staging Simulation" class="project-img" id="rocketStageImg">
+                  <button class="img-inspect-btn">🔍 Inspect Flight Stage</button>
+                </div>
+              </div>
+
+              <div class="stage-detail-box" id="stageDetailBox">
+                <div class="stage-detail-title" id="stageDetailTitle">Stage 1: High TWR Atmospheric Escape (SRBs)</div>
+                <div class="stage-detail-desc" id="stageDetailDesc">
+                  High thrust-to-weight solid rocket boosters engineered to overcome sea-level atmospheric drag and punch through the thick lower atmosphere with maximum initial impulse.
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Case Study: Simulated Mun Mission Architecture</h3>
+              <p class="project-summary">
+                Designed a complete 5-stage spacecraft architecture engineered for orbital insertion, trans-lunar transfer, surface touchdown, and atmospheric reentry recovery. Calculated delta-V requirements using the Tsiolkovsky rocket equation to ensure mission feasibility.
+              </p>
+
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th>Mission Metric</th>
+                    <th>Specification</th>
+                    <th>Engineering Purpose</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Total Mission ΔV</strong></td>
+                    <td><strong>9,243 m/s</strong></td>
+                    <td>Sufficient for LKO, TMI, capture, landing, ascent, & return</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Vehicle Part Count</strong></td>
+                    <td>147 Components</td>
+                    <td>Optimized for structural integrity & aerodynamic fairing limits</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Staging Architecture</strong></td>
+                    <td>5 Discrete Stages</td>
+                    <td>Maximizes vacuum specific impulse ($I_{sp}$) by discarding dry mass</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ascent Profile</strong></td>
+                    <td>Gravity Turn @ 70km</td>
+                    <td>Gradual pitch-over to trade vertical climb for horizontal orbital velocity</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Landing Dynamics</strong></td>
+                    <td>Wide-Stance Quad Legs</td>
+                    <td>Prevents tipping on uneven regolith during constant-altitude suicide burns</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 7: Biomimetic Robotics & Logic-Driven Kinematics -->
+        <article class="project-card" data-era="virtual" data-discipline="logic kinematics">
+          <div class="card-top-bar">
+            <span class="era-badge virtual">Robotics & Mechatronics</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Biomimetic Linkages</span>
+              <span class="tech-tag">Boolean Logic Gates</span>
+              <span class="tech-tag">Gait Timing Optimization</span>
+              <span class="tech-tag">Arduino-Style Sequencing</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p10_img1_585.jpeg', 'Biomimetic Multi-Legged Walking Robot')">
+                  <img src="assets/images/p10_img1_585.jpeg" alt="Biomimetic Robot" class="project-img">
+                  <button class="img-inspect-btn">🔍 Gait Robot</button>
+                </div>
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p10_img4_588.jpeg', 'Digital Logic Architecture - AND, OR, XOR, NAND State Machine')">
+                  <img src="assets/images/p10_img4_588.jpeg" alt="Digital Logic Gates" class="project-img">
+                  <button class="img-inspect-btn">🔍 Logic Gates</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Biomimetic Robotics & Logic-Driven Kinematics</h3>
+              <p class="project-summary">
+                Designed a multi-legged walking mechanism integrating sequential rotation matrices and an on-board digital logic array to coordinate joint phase shifts. This mechatronic system synchronizes mechanical linkages to translate rotary motion into a stable linear gait while optimizing runtime timing to prevent joint binding.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Digital Logic Architecture</div>
+                  <ul class="spec-list">
+                    <li><strong>Boolean Gate Matrix:</strong> Configured standard logic gates (AND, OR, XOR, NAND) to handle state machines and control feedback loops.</li>
+                    <li><strong>Phase Shifting:</strong> Prevents opposing leg pairs from entering identical stride phases simultaneously.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Sequential Multi-Axis Actuation</div>
+                  <ul class="spec-list">
+                    <li>Functions exactly like a real-world programmable microcontroller (e.g. Arduino) to time specific rotational angles of hip and knee joints during walking cycles.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         ERA 3: 3D PRINTING, CAD & MECHATRONICS
+         ===================================================================== -->
+    <section class="section era-section-group" id="manufacturing-era" data-era-group="manufacturing">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>03 // 3D PRINTING & MODELING ERA</span>
+        </div>
+        <h2 class="section-title">Fusion 360 Design & Additive Manufacturing</h2>
+        <p class="section-desc">
+          Transforming theoretical mechanics and digital simulations into physical realities. Leveraging Autodesk Fusion 360, TinkerCAD, and Creality 3D printers for high-precision component fabrication, tolerance testing, and functional electromechanical prototypes.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Project 8: Fusion 360 Design -->
+        <article class="project-card" data-era="manufacturing" data-discipline="cad">
+          <div class="card-top-bar">
+            <span class="era-badge manufacturing">Fusion 360 CAD</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Autodesk Fusion 360</span>
+              <span class="tech-tag">Ergonomic Modeling</span>
+              <span class="tech-tag">Woodworking & Fabrication</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p11_img1_597.png', 'Ergonomic Gaming/Office Chair - Fusion 360 CAD Model')">
+                  <img src="assets/images/p11_img1_597.png" alt="Ergonomic Chair CAD" class="project-img">
+                  <button class="img-inspect-btn">🔍 Chair CAD</button>
+                </div>
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p11_img2_598.png', 'Console End Table - 3D CAD vs Physical Build Comparison')">
+                  <img src="assets/images/p11_img2_598.png" alt="Table 3D CAD vs Real" class="project-img">
+                  <button class="img-inspect-btn">🔍 CAD vs Real</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Fusion Design: Parametric CAD & Physical Build</h3>
+              <p class="project-summary">
+                Applied parametric solid modeling in Autodesk Fusion 360 for complex product design. Engineered a multi-part ergonomic chair assembly and designed a dual-tone console table with cross-bracing that was fully translated from 3D CAD into a real-world physical build.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Design Process</div>
+                  <ul class="spec-list">
+                    <li><strong>Parametric Constraining:</strong> Fully constrained sketches ensuring rapid dimensional modifications.</li>
+                    <li><strong>Joint Simulation:</strong> Verified mechanical interference and clearance fits prior to cutting materials.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Manufacturing Fidelity</div>
+                  <ul class="spec-list">
+                    <li>Achieved seamless 1-to-1 match between the virtual CAD render and the final physical wood-and-lacquer construction.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 9: Wind-Powered Kinematic Transport Prototype -->
+        <article class="project-card" data-era="manufacturing" data-discipline="cad kinematics">
+          <div class="card-top-bar">
+            <span class="era-badge manufacturing">Fluid Dynamics & 3D Print</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Autodesk TinkerCAD</span>
+              <span class="tech-tag">Creality 3D Printer</span>
+              <span class="tech-tag">Propeller Pitch Iteration</span>
+              <span class="tech-tag">Power Transfer Linkage</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="project-img-wrapper" onclick="openLightbox('assets/images/p12_img1_604.png', 'Wind-Powered Kinematic Transport Prototype - Bench testing with fan airflow')">
+                <img src="assets/images/p12_img1_604.png" alt="Wind Powered Kinematic Transport" class="project-img">
+                <button class="img-inspect-btn">🔍 View Test Bench</button>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem;">
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p12_img2_606.png', 'Propeller Pitch Attempt 1 - Initial Blade Angle')">
+                  <img src="assets/images/p12_img2_606.png" alt="Propeller Attempt 1" class="project-img">
+                  <button class="img-inspect-btn">🔍 Attempt 1</button>
+                </div>
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p12_img3_607.png', 'Propeller Pitch Attempt 2 - Optimized Aerodynamic Blade Pitch')">
+                  <img src="assets/images/p12_img3_607.png" alt="Propeller Attempt 2" class="project-img">
+                  <button class="img-inspect-btn">🔍 Attempt 2 (Tuned)</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Wind-Powered Kinematic Transport Prototype</h3>
+              <p class="project-summary">
+                Engineered a wind-driven rover that harnesses ambient air currents to generate forward mechanical locomotion. Developed custom multi-blade turbine propellers, evaluated fluid-dynamic pitch variations, and routed rotational energy to the drive axle through a 90-degree transmission linkage.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Innovations</div>
+                  <ul class="spec-list">
+                    <li><strong>Optimized Blade Pitch:</strong> Iterated through several 3D-printed impeller geometries (Attempt 1 vs. Attempt 2) to maximize torque extraction at lower air velocities.</li>
+                    <li><strong>Power Transmission:</strong> Efficient bevel/gear linkage converting horizontal turbine rotation to vertical axle drive.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Challenges Solved</div>
+                  <ul class="spec-list">
+                    <li><strong>Center of Gravity Management:</strong> Re-engineered the modular Technic chassis to prevent aerodynamic tipping under high frontal wind drag.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 10: Pocket Connect 4 Snap-Fit Study -->
+        <article class="project-card" data-era="manufacturing" data-discipline="cad">
+          <div class="card-top-bar">
+            <span class="era-badge manufacturing">Precision Fastening Study</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Tolerance: 0.22mm</span>
+              <span class="tech-tag">Ender 3 V3 KE</span>
+              <span class="tech-tag">Snap-Fit Cantilever</span>
+              <span class="tech-tag">PLA Material</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p13_img2_622.png', 'Pocket Connect 4 - Assembled Enclosure Render')">
+                  <img src="assets/images/p13_img2_622.png" alt="Pocket Connect 4 Render" class="project-img">
+                  <button class="img-inspect-btn">🔍 Assembly</button>
+                </div>
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p13_img3_623.png', 'Pocket Connect 4 - Exploded 3-Part Modular Component View')">
+                  <img src="assets/images/p13_img3_623.png" alt="Exploded 3 Part View" class="project-img">
+                  <button class="img-inspect-btn">🔍 Exploded View</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Integrated Fastening Systems: The Pocket Connect 4 Study</h3>
+              <p class="project-summary">
+                Addressed the problem of component retention and portability in travel games by creating a compact, 3D-printed enclosure featuring an integrated cantilever snap-fit lid and friction-fit assembly base.
+              </p>
+
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th>Component</th>
+                    <th>Mechanism Type</th>
+                    <th>Specification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Part 1: Cantilever Lid</strong></td>
+                    <td>Snap-Top Flexure Joint</td>
+                    <td>Engineered deflection tooth with tactile lock</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Part 2: Play Grid</strong></td>
+                    <td>Column Alignment Core</td>
+                    <td>Precision slot guides with anti-jam chamfers</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Part 3: Assembly Base</strong></td>
+                    <td>Friction Fit Housing</td>
+                    <td><strong>0.22mm air gap tolerance</strong> on Creality Ender 3 V3 KE</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 11: Gravity-Driven Escapement Clockwork System -->
+        <article class="project-card project-card-featured" data-era="manufacturing" data-discipline="cad kinematics">
+          <div class="card-top-bar">
+            <span class="era-badge manufacturing">Horological Kinematics & 3D Print</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">14 CAD Iterations</span>
+              <span class="tech-tag">5-Stage Chain Drive</span>
+              <span class="tech-tag">3-Gen Ratchet</span>
+              <span class="tech-tag">Physical Prototype Graveyard</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="project-img-wrapper" onclick="openLightbox('assets/images/p14_img1_630.png', 'Gravity-Driven Escapement & Ratchet System - Complete Physical Apparatus with Callouts: Weight, Chain, Ratchet, Escapement Mechanism')">
+                <img src="assets/images/p14_img1_630.png" alt="Gravity Driven Escapement Apparatus" class="project-img">
+                <button class="img-inspect-btn">🔍 View Labeled Mechanism</button>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem;">
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p16_img1_653.png', 'Escapement Prototype Graveyard - 15+ 3D-printed iterations of escapement wheels and anchor pallets')">
+                  <img src="assets/images/p16_img1_653.png" alt="Escapement Graveyard" class="project-img">
+                  <button class="img-inspect-btn">🔍 The Graveyard</button>
+                </div>
+                <div class="project-img-wrapper" onclick="openLightbox('assets/images/p17_img7_664.png', 'Pendulum Ratchet & Drive Train - 5 Chain Generations (V1-V5) and 3 Ratchet Revisions')">
+                  <img src="assets/images/p17_img7_664.png" alt="Chain & Ratchet Evolution" class="project-img">
+                  <button class="img-inspect-btn">🔍 Chain V1-V5 Evolution</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Gravity-Driven Escapement & Ratchet System</h3>
+              <p class="project-summary">
+                Designed and manufactured an entire gravity-powered pendulum clockwork mechanism. This comprehensive research study involved developing 14 discrete CAD iterations, 5 chain drive versions (from LEGO tread to custom modular 3D-printed link chains), and 3 ratchet generations to achieve continuous, deadbeat energy impulse transfer.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Kinematic Sub-Assemblies</div>
+                  <ul class="spec-list">
+                    <li><strong>Escapement Wheel & Anchor:</strong> Optimized pallet tooth angle to minimize recoil and deliver consistent impulse to the pendulum bob.</li>
+                    <li><strong>Drive Train Evolution:</strong> Transitioned from LEGO treads (V1) to custom interlocking links (V5) for higher tensile strength without stretching.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 The Iteration Graveyard</div>
+                  <ul class="spec-list">
+                    <li>Documented dozens of discarded prints to analyze tooth wear, friction coefficients, and center-distance tolerances in horological engineering.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div style="margin-top: 0.5rem;">
+                <a href="#simulator" class="btn btn-accent" style="width: 100%;">
+                  <span>⚡ Test Mechanism in Live Canvas Simulator Below</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 12: Brushed DC Motor Prototype -->
+        <article class="project-card" data-era="manufacturing" data-discipline="electromechanical">
+          <div class="card-top-bar">
+            <span class="era-badge manufacturing">Electromechanical Prototype</span>
+            <div class="card-tech-tags">
+              <span class="tech-tag">Hand-Wound Armature</span>
+              <span class="tech-tag">Lorentz Force</span>
+              <span class="tech-tag">Neodymium Array</span>
+              <span class="tech-tag">Commutator Timing</span>
+            </div>
+          </div>
+
+          <div class="card-content-layout">
+            <div class="card-media-side">
+              <div class="project-img-wrapper" onclick="openLightbox('assets/images/p18_img2_671.png', 'Brushed DC (BDC) Motor Prototype - Labeled Callouts: 9V Battery, Neodymium Magnet Array, Stability Tower & Brush Contacts, Lorentz Force Rotor')">
+                <img src="assets/images/p18_img2_671.png" alt="Brushed DC Motor Prototype" class="project-img">
+                <button class="img-inspect-btn">🔍 Inspect Electromechanical Rig</button>
+              </div>
+            </div>
+
+            <div class="card-info-side">
+              <h3 class="project-heading">Brushed DC (BDC) Motor Prototype</h3>
+              <p class="project-summary">
+                Designed and assembled a functional brushed DC motor utilizing LEGO Technic for the structural chassis and a hand-wound copper wire armature. The project required micro-positioning of the commutator and brush system to ensure continuous current reversal and consistent torque generation.
+              </p>
+
+              <div class="card-spec-grid">
+                <div class="spec-box">
+                  <div class="spec-box-title">⚙️ Electromechanical Highlights</div>
+                  <ul class="spec-list">
+                    <li><strong>Lorentz Force Rotor:</strong> Hand-wound magnetic coil armature situated inside a permanent magnetic field.</li>
+                    <li><strong>Stability Tower & Contacts:</strong> Spring-tensioned copper brush contacts aligned with commutator split rings.</li>
+                  </ul>
+                </div>
+
+                <div class="spec-box orange">
+                  <div class="spec-box-title">🔧 Challenges & Iterations</div>
+                  <ul class="spec-list">
+                    <li><strong>Flux Density:</strong> Swapped initial wiring for high-conductivity enamel magnet wire to increase coil density.</li>
+                    <li><strong>Field Calibration:</strong> Tested multiple neodymium magnet array configurations to maximize RPM without stalling.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         INTERACTIVE KINEMATICS LAB & ESCAPEMENT SIMULATOR
+         ===================================================================== -->
+    <section class="section" id="simulator">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>04 // INTERACTIVE LAB</span>
+        </div>
+        <h2 class="section-title">Live Escapement & Kinematics Simulator</h2>
+        <p class="section-desc">
+          An interactive, physics-driven canvas model of Aiden’s gravity-driven escapement clockwork. Adjust pendulum length, drive weight, and escapement teeth in real time to observe the tick-tock impulse cycle.
+        </p>
+      </div>
+
+      <div class="project-card simulator-card">
+        <div class="sim-grid">
+          <div class="sim-canvas-wrapper">
+            <canvas id="escapementCanvas" width="600" height="380"></canvas>
+          </div>
+
+          <div class="sim-controls-panel">
+            <div class="sim-control-group">
+              <div class="sim-label-row">
+                <span>Pendulum Length ($L$):</span>
+                <span class="sim-val" id="valLength">180 mm</span>
+              </div>
+              <input type="range" class="sim-slider" id="sliderLength" min="100" max="250" value="180">
+            </div>
+
+            <div class="sim-control-group">
+              <div class="sim-label-row">
+                <span>Drive Torque / Weight:</span>
+                <span class="sim-val" id="valWeight">1.5 N·m</span>
+              </div>
+              <input type="range" class="sim-slider" id="sliderWeight" min="0.5" max="3.0" step="0.1" value="1.5">
+            </div>
+
+            <div class="sim-control-group">
+              <div class="sim-label-row">
+                <span>Escapement Teeth Count:</span>
+                <span class="sim-val" id="valTeeth">20 Teeth</span>
+              </div>
+              <input type="range" class="sim-slider" id="sliderTeeth" min="12" max="32" step="2" value="20">
+            </div>
+
+            <div class="sim-control-group">
+              <div class="sim-label-row">
+                <span>Friction / Damping ($c$):</span>
+                <span class="sim-val" id="valDamping">Low</span>
+              </div>
+              <input type="range" class="sim-slider" id="sliderDamping" min="0.001" max="0.02" step="0.002" value="0.005">
+            </div>
+
+            <div class="sim-btn-row">
+              <button class="btn btn-primary" id="btnPauseSim">⏸ Pause / Run</button>
+              <button class="btn btn-outline" id="btnResetSim">🔄 Reset Oscillations</button>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">
+              Current Beat: <span style="color: var(--cyan-primary);" id="simBpm">60.0 BPM</span> | Escapement State: <span style="color: var(--emerald-accent);" id="simState">IMPULSE TICK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         ENGINEERING SKILLS & TOOLKIT MATRIX
+         ===================================================================== -->
+    <section class="section" id="skills">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>05 // COMPETENCIES</span>
+        </div>
+        <h2 class="section-title">Engineering Skills & Toolchain</h2>
+        <p class="section-desc">
+          Interdisciplinary capabilities spanning computer-aided design, additive prototyping, electromechanical assembly, digital twin simulations, and kinematic optimization.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-category-card">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">📐</div>
+            <h3 class="skill-cat-title">CAD & Modeling</h3>
+          </div>
+          <div class="skill-badges-flex">
+            <span class="skill-badge">Autodesk Fusion 360</span>
+            <span class="skill-badge">TinkerCAD</span>
+            <span class="skill-badge">Parametric Modeling</span>
+            <span class="skill-badge">Assembly Mates & Joints</span>
+            <span class="skill-badge">Tolerance Analysis (0.22mm)</span>
+            <span class="skill-badge">Wireframe Modeling</span>
+            <span class="skill-badge">Exploded Assembly Views</span>
+          </div>
+        </div>
+
+        <div class="skill-category-card">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">🖨️</div>
+            <h3 class="skill-cat-title">Additive & Fabrication</h3>
+          </div>
+          <div class="skill-badges-flex">
+            <span class="skill-badge">Creality Ender 3 V3 KE</span>
+            <span class="skill-badge">FDM Slicing & Cura</span>
+            <span class="skill-badge">PLA & Composite Materials</span>
+            <span class="skill-badge">Cantilever Snap-Fits</span>
+            <span class="skill-badge">Friction-Fit Assemblies</span>
+            <span class="skill-badge">Woodworking & Joinery</span>
+            <span class="skill-badge">Makerspace Machine Tools</span>
+          </div>
+        </div>
+
+        <div class="skill-category-card">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">⚙️</div>
+            <h3 class="skill-cat-title">Kinematics & Mechatronics</h3>
+          </div>
+          <div class="skill-badges-flex">
+            <span class="skill-badge">Escapements & Clockwork</span>
+            <span class="skill-badge">Ratchet & Pawl Drivetrains</span>
+            <span class="skill-badge">Gear Trains & Backlash</span>
+            <span class="skill-badge">Brushed DC Motor Design</span>
+            <span class="skill-badge">Armature Winding</span>
+            <span class="skill-badge">Universal Joint Mechanics</span>
+            <span class="skill-badge">Multi-Axis Actuation</span>
+          </div>
+        </div>
+
+        <div class="skill-category-card">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">🌌</div>
+            <h3 class="skill-cat-title">Virtual Simulation</h3>
+          </div>
+          <div class="skill-badges-flex">
+            <span class="skill-badge">Digital Twin Workflows</span>
+            <span class="skill-badge">Kerbal Space Program (KSP)</span>
+            <span class="skill-badge">Scrap Mechanic Physics</span>
+            <span class="skill-badge">70+ Piston Engine Designs</span>
+            <span class="skill-badge">TWR & ΔV Optimization</span>
+            <span class="skill-badge">Orbital Staging Profiles</span>
+            <span class="skill-badge">Gravity Turn Mechanics</span>
+          </div>
+        </div>
+
+        <div class="skill-category-card">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">⚡</div>
+            <h3 class="skill-cat-title">Logic & State Control</h3>
+          </div>
+          <div class="skill-badges-flex">
+            <span class="skill-badge">Boolean Logic (AND, OR, XOR)</span>
+            <span class="skill-badge">State Machine Architecture</span>
+            <span class="skill-badge">Sequential Micro-Timing</span>
+            <span class="skill-badge">Strandbeest Walking Gait</span>
+            <span class="skill-badge">Sensor Feedback Loops</span>
+            <span class="skill-badge">Geyser/PaperMC Automation</span>
+          </div>
+        </div>
+
+        <div class="skill-category-card">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">🔬</div>
+            <h3 class="skill-cat-title">Engineering Methods</h3>
+          </div>
+          <div class="skill-badges-flex">
+            <span class="skill-badge">Failure Point Identification</span>
+            <span class="skill-badge">Rapid Iterative Prototyping</span>
+            <span class="skill-badge">Requirement Analysis</span>
+            <span class="skill-badge">Center of Gravity Tuning</span>
+            <span class="skill-badge">Fluid Dynamics (Propeller Pitch)</span>
+            <span class="skill-badge">Inertia & Momentum Balance</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         CONTACT & CONNECT SECTION
+         ===================================================================== -->
+    <section class="section" id="contact">
+      <div class="contact-card">
+        <div class="contact-grid">
+          <div class="contact-info-col">
+            <div class="section-tag">06 // GET IN TOUCH</div>
+            <h2 class="section-title">Let’s Build Something Remarkable</h2>
+            <p class="section-desc">
+              Whether you’re interested in collaborating on mechanical engineering projects, discussing prototype design, or exploring engineering opportunities, feel free to reach out directly.
+            </p>
+
+            <div class="contact-channels">
+              <div class="channel-item">
+                <div class="channel-meta">
+                  <div class="channel-icon">✉️</div>
+                  <div>
+                    <div class="channel-label">Email</div>
+                    <div class="channel-value">aidenhockinberry@gmail.com</div>
+                  </div>
+                </div>
+                <button class="copy-btn" onclick="copyContact('aidenhockinberry@gmail.com')">Copy</button>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-meta">
+                  <div class="channel-icon">📞</div>
+                  <div>
+                    <div class="channel-label">Phone</div>
+                    <div class="channel-value">(614) 632-6111</div>
+                  </div>
+                </div>
+                <button class="copy-btn" onclick="copyContact('(614) 632-6111')">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-col">
+            <form id="contactForm" onsubmit="handleContactSubmit(event)">
+              <div class="form-group">
+                <label class="form-label" for="contactName">YOUR NAME / ORGANIZATION</label>
+                <input type="text" id="contactName" class="form-input" placeholder="e.g. Dr. Alex Vance / Tesla" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactEmail">YOUR EMAIL</label>
+                <input type="email" id="contactEmail" class="form-input" placeholder="name@domain.com" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactMessage">PROJECT INQUIRY / MESSAGE</label>
+                <textarea id="contactMessage" class="form-textarea" placeholder="Tell me about your project, mechanism requirement, or opportunity..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <span>🚀 Send Message Directly to Aiden</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-text">
+        © 2026 Aiden Hockinberry — Mechanical Engineering & Prototyping Portfolio.
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <button class="btn btn-outline" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;" onclick="window.scrollTo({top:0, behavior:'smooth'})">▲ Back to Top</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for High-Resolution CAD & Diagrams -->
+  <div class="modal-backdrop" id="lightboxModal">
+    <div class="lightbox-modal">
+      <div class="modal-header">
+        <div class="modal-title" id="lightboxTitle">High-Resolution CAD Blueprint</div>
+        <button class="modal-close-btn" onclick="closeLightbox()" title="Close Lightbox (Esc)">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="High resolution inspection" class="modal-image" id="lightboxImg">
+        <div class="modal-caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF Document View Modal (Side-by-side Page Inspector) -->
+  <div class="modal-backdrop" id="pdfDocModal">
+    <div class="lightbox-modal" style="max-width: 1200px;">
+      <div class="modal-header">
+        <div class="modal-title">Original Portfolio Document (19 Pages)</div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <select id="pageSelect" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); padding: 0.3rem 0.6rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.8rem;" onchange="changePdfPage(this.value)">
+            <!-- Populated via JS for Pages 1-19 -->
+          </select>
+          <button class="modal-close-btn" onclick="closePdfDocModal()">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <img src="assets/pages/page_1.png" alt="PDF Page" class="modal-image" id="pdfPageDisplayImg" style="max-height: 75vh;">
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <button class="btn btn-outline" onclick="prevPdfPage()">◀ Previous Page</button>
+          <span id="pageNumberIndicator" style="font-family: var(--font-mono); font-size: 0.85rem; display: flex; align-items: center;">Page 1 of 19</span>
+          <button class="btn btn-outline" onclick="nextPdfPage()">Next Page ▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Javascript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
