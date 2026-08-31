@@ -28,7 +28,6 @@
         <li><a href="#early-era" class="nav-link">Early Era</a></li>
         <li><a href="#virtual-era" class="nav-link">Virtual Era</a></li>
         <li><a href="#manufacturing-era" class="nav-link">3D Printing Era</a></li>
-        <li><a href="#simulator" class="nav-link">Kinematics Lab</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -91,7 +90,7 @@
 
           <div class="hero-cta">
             <a href="#early-era" class="btn btn-primary">Explore Engineering Journey</a>
-            <a href="#simulator" class="btn btn-accent">⚡ Open Kinematics Lab</a>
+            <a href="#manufacturing-era" class="btn btn-accent">⚙️ 3D Printing & Physical Builds</a>
             <a href="mailto:aidenhockinberry@gmail.com" class="btn btn-outline">aidenhockinberry@gmail.com</a>
           </div>
         </div>
@@ -815,12 +814,6 @@
                   </ul>
                 </div>
               </div>
-
-              <div style="margin-top: 0.5rem;">
-                <a href="#simulator" class="btn btn-accent" style="width: 100%;">
-                  <span>⚡ Test Mechanism in Live Canvas Simulator Below</span>
-                </a>
-              </div>
             </div>
           </div>
         </article>
@@ -876,78 +869,12 @@
     </section>
 
     <!-- =====================================================================
-         INTERACTIVE KINEMATICS LAB & ESCAPEMENT SIMULATOR
-         ===================================================================== -->
-    <section class="section" id="simulator">
-      <div class="section-header">
-        <div class="section-tag">
-          <span>04 // INTERACTIVE LAB</span>
-        </div>
-        <h2 class="section-title">Live Escapement & Kinematics Simulator</h2>
-        <p class="section-desc">
-          An interactive, physics-driven canvas model of Aiden’s gravity-driven escapement clockwork. Adjust pendulum length, drive weight, and escapement teeth in real time to observe the tick-tock impulse cycle.
-        </p>
-      </div>
-
-      <div class="project-card simulator-card">
-        <div class="sim-grid">
-          <div class="sim-canvas-wrapper">
-            <canvas id="escapementCanvas" width="600" height="380"></canvas>
-          </div>
-
-          <div class="sim-controls-panel">
-            <div class="sim-control-group">
-              <div class="sim-label-row">
-                <span>Pendulum Length ($L$):</span>
-                <span class="sim-val" id="valLength">180 mm</span>
-              </div>
-              <input type="range" class="sim-slider" id="sliderLength" min="100" max="250" value="180">
-            </div>
-
-            <div class="sim-control-group">
-              <div class="sim-label-row">
-                <span>Drive Torque / Weight:</span>
-                <span class="sim-val" id="valWeight">1.5 N·m</span>
-              </div>
-              <input type="range" class="sim-slider" id="sliderWeight" min="0.5" max="3.0" step="0.1" value="1.5">
-            </div>
-
-            <div class="sim-control-group">
-              <div class="sim-label-row">
-                <span>Escapement Teeth Count:</span>
-                <span class="sim-val" id="valTeeth">20 Teeth</span>
-              </div>
-              <input type="range" class="sim-slider" id="sliderTeeth" min="12" max="32" step="2" value="20">
-            </div>
-
-            <div class="sim-control-group">
-              <div class="sim-label-row">
-                <span>Friction / Damping ($c$):</span>
-                <span class="sim-val" id="valDamping">Low</span>
-              </div>
-              <input type="range" class="sim-slider" id="sliderDamping" min="0.001" max="0.02" step="0.002" value="0.005">
-            </div>
-
-            <div class="sim-btn-row">
-              <button class="btn btn-primary" id="btnPauseSim">⏸ Pause / Run</button>
-              <button class="btn btn-outline" id="btnResetSim">🔄 Reset Oscillations</button>
-            </div>
-
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">
-              Current Beat: <span style="color: var(--cyan-primary);" id="simBpm">60.0 BPM</span> | Escapement State: <span style="color: var(--emerald-accent);" id="simState">IMPULSE TICK</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
          ENGINEERING SKILLS & TOOLKIT MATRIX
          ===================================================================== -->
     <section class="section" id="skills">
       <div class="section-header">
         <div class="section-tag">
-          <span>05 // COMPETENCIES</span>
+          <span>04 // COMPETENCIES</span>
         </div>
         <h2 class="section-title">Engineering Skills & Toolchain</h2>
         <p class="section-desc">
@@ -1059,7 +986,7 @@
       <div class="contact-card">
         <div class="contact-grid">
           <div class="contact-info-col">
-            <div class="section-tag">06 // GET IN TOUCH</div>
+            <div class="section-tag">05 // GET IN TOUCH</div>
             <h2 class="section-title">Let’s Build Something Remarkable</h2>
             <p class="section-desc">
               Whether you’re interested in collaborating on mechanical engineering projects, discussing prototype design, or exploring engineering opportunities, feel free to reach out directly.

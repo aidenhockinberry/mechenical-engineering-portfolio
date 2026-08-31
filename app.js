@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initEngineGallery();
   initCadViewers();
   initRocketStages();
-  initEscapementSimulator();
   initFilters();
   initThemeToggle();
   initPdfModal();
@@ -178,253 +177,7 @@ function openActiveStageLightbox() {
 }
 
 /* ==========================================================================
-   4. INTERACTIVE ESCAPEMENT KINEMATICS SIMULATOR (Canvas Physics Engine)
-   ========================================================================== */
-let simRunning = true;
-let simTime = 0;
-let pendulumAngle = 0.25;
-let pendulumVelocity = 0.0;
-let gearAngle = 0;
-let gearVelocity = 0;
-let lastTickTime = 0;
-let tickCount = 0;
-
-function initEscapementSimulator() {
-  const canvas = document.getElementById('escapementCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  const sliderLength = document.getElementById('sliderLength');
-  const sliderWeight = document.getElementById('sliderWeight');
-  const sliderTeeth = document.getElementById('sliderTeeth');
-  const sliderDamping = document.getElementById('sliderDamping');
-
-  const valLength = document.getElementById('valLength');
-  const valWeight = document.getElementById('valWeight');
-  const valTeeth = document.getElementById('valTeeth');
-  const valDamping = document.getElementById('valDamping');
-
-  const bpmDisplay = document.getElementById('simBpm');
-  const stateDisplay = document.getElementById('simState');
-  const btnPause = document.getElementById('btnPauseSim');
-  const btnReset = document.getElementById('btnResetSim');
-
-  if (sliderLength) {
-    sliderLength.addEventListener('input', (e) => {
-      valLength.textContent = `${e.target.value} mm`;
-    });
-  }
-  if (sliderWeight) {
-    sliderWeight.addEventListener('input', (e) => {
-      valWeight.textContent = `${parseFloat(e.target.value).toFixed(1)} N·m`;
-    });
-  }
-  if (sliderTeeth) {
-    sliderTeeth.addEventListener('input', (e) => {
-      valTeeth.textContent = `${e.target.value} Teeth`;
-    });
-  }
-  if (sliderDamping) {
-    sliderDamping.addEventListener('input', (e) => {
-      const val = parseFloat(e.target.value);
-      valDamping.textContent = val < 0.006 ? 'Low' : val < 0.014 ? 'Medium' : 'High';
-    });
-  }
-
-  if (btnPause) {
-    btnPause.addEventListener('click', () => {
-      simRunning = !simRunning;
-      btnPause.innerHTML = simRunning ? '⏸ Pause / Run' : '▶ Resume Simulation';
-      if (simRunning) requestAnimationFrame(renderLoop);
-    });
-  }
-
-  if (btnReset) {
-    btnReset.addEventListener('click', () => {
-      pendulumAngle = 0.35;
-      pendulumVelocity = 0.0;
-      gearAngle = 0;
-      showToast('🔄 Escapement oscillation reset to initial displacement.');
-    });
-  }
-
-  function renderLoop(timestamp) {
-    if (!simRunning) return;
-
-    // Canvas scaling
-    const w = canvas.width;
-    const h = canvas.height;
-    ctx.clearRect(0, 0, w, h);
-
-    // Physics parameters
-    const length = sliderLength ? parseFloat(sliderLength.value) : 180;
-    const torque = sliderWeight ? parseFloat(sliderWeight.value) : 1.5;
-    const teeth = sliderTeeth ? parseInt(sliderTeeth.value) : 20;
-    const damping = sliderDamping ? parseFloat(sliderDamping.value) : 0.005;
-
-    const gravity = 9.81 * 80;
-    const dt = 0.016; // 60fps step
-
-    // Pendulum physics: theta'' = -(g/L) * sin(theta) - damping * theta' + impulse
-    const pendulumAcc = -(gravity / length) * Math.sin(pendulumAngle) - damping * pendulumVelocity;
-    pendulumVelocity += pendulumAcc * dt;
-    pendulumAngle += pendulumVelocity * dt;
-
-    // Escapement impulse logic
-    const toothStep = (Math.PI * 2) / teeth;
-    let inImpulse = false;
-
-    // When pendulum passes near center (theta ~ 0) and moving in direction, give impulse
-    if (Math.abs(pendulumAngle) < 0.08 && Math.abs(pendulumVelocity) > 0.05) {
-      inImpulse = true;
-      const impulseDir = Math.sign(pendulumVelocity);
-      pendulumVelocity += impulseDir * (torque * 0.02);
-      gearVelocity = 0.08;
-      gearAngle += toothStep * 0.05;
-
-      const now = performance.now();
-      if (now - lastTickTime > 250) {
-        tickCount++;
-        const delta = (now - lastTickTime) / 1000;
-        const bpm = (60 / delta).toFixed(1);
-        if (bpmDisplay && isFinite(bpm)) bpmDisplay.textContent = `${bpm} BPM`;
-        lastTickTime = now;
-        if (stateDisplay) {
-          stateDisplay.textContent = tickCount % 2 === 0 ? 'TICK (LEFT PALLET IMPULSE)' : 'TOCK (RIGHT PALLET IMPULSE)';
-          stateDisplay.style.color = 'var(--cyan-primary)';
-        }
-      }
-    } else {
-      gearVelocity *= 0.85;
-      gearAngle += gearVelocity;
-    }
-
-    // DRAWING ESCAPEMENT GEAR
-    const centerX = w / 2;
-    const gearCenterY = 130;
-    const gearRadius = 75;
-
-    ctx.save();
-    ctx.translate(centerX, gearCenterY);
-    ctx.rotate(gearAngle);
-
-    // Gear wheel hub & rim
-    ctx.strokeStyle = '#00f0ff';
-    ctx.lineWidth = 3;
-    ctx.fillStyle = 'rgba(0, 240, 255, 0.06)';
-    ctx.beginPath();
-    ctx.arc(0, 0, gearRadius, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-
-    // Spokes
-    ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
-    ctx.lineWidth = 1.5;
-    for (let i = 0; i < 4; i++) {
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(gearRadius * Math.cos((i * Math.PI) / 2), gearRadius * Math.sin((i * Math.PI) / 2));
-      ctx.stroke();
-    }
-
-    // Escapement Club Teeth
-    ctx.fillStyle = '#38bdf8';
-    for (let i = 0; i < teeth; i++) {
-      const a = (i * Math.PI * 2) / teeth;
-      ctx.save();
-      ctx.rotate(a);
-      ctx.beginPath();
-      ctx.moveTo(gearRadius - 2, -4);
-      ctx.lineTo(gearRadius + 14, 0);
-      ctx.lineTo(gearRadius + 8, 8);
-      ctx.lineTo(gearRadius - 4, 3);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
-
-    // Center Arbor
-    ctx.fillStyle = '#ff6b00';
-    ctx.beginPath();
-    ctx.arc(0, 0, 8, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-
-    // DRAWING ANCHOR & PALLETS
-    const anchorY = 45;
-    const anchorSpan = 50;
-
-    ctx.save();
-    ctx.translate(centerX, anchorY);
-    // Anchor rotates slightly with pendulum
-    ctx.rotate(-pendulumAngle * 0.45);
-
-    // Anchor body
-    ctx.strokeStyle = inImpulse ? '#ff6b00' : '#10b981';
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.moveTo(-anchorSpan, 25);
-    ctx.lineTo(0, 0);
-    ctx.lineTo(anchorSpan, 25);
-    ctx.stroke();
-
-    // Pallet jewels
-    ctx.fillStyle = inImpulse ? '#ff6b00' : '#00f0ff';
-    // Left Pallet
-    ctx.fillRect(-anchorSpan - 4, 25, 8, 14);
-    // Right Pallet
-    ctx.fillRect(anchorSpan - 4, 25, 8, 14);
-
-    // Anchor Pivot
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(0, 0, 5, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-
-    // DRAWING PENDULUM SUSPENSION & BOB
-    const pendulumPivotY = 45;
-    const bobX = centerX + Math.sin(pendulumAngle) * (length * 1.2);
-    const bobY = pendulumPivotY + Math.cos(pendulumAngle) * (length * 1.2);
-
-    // Pendulum rod
-    ctx.strokeStyle = 'rgba(248, 250, 252, 0.8)';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(centerX, pendulumPivotY);
-    ctx.lineTo(bobX, bobY);
-    ctx.stroke();
-
-    // Pendulum Bob
-    ctx.fillStyle = '#ff6b00';
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(bobX, bobY, 18, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-
-    // Bob mass highlight
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-    ctx.beginPath();
-    ctx.arc(bobX - 5, bobY - 5, 5, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Technical overlay text on canvas
-    ctx.font = '11px JetBrains Mono';
-    ctx.fillStyle = 'rgba(148, 163, 184, 0.8)';
-    ctx.fillText(`θ = ${(pendulumAngle * (180 / Math.PI)).toFixed(1)}°`, 15, 25);
-    ctx.fillText(`ω = ${pendulumVelocity.toFixed(2)} rad/s`, 15, 42);
-    ctx.fillText(`Teeth = ${teeth} | L = ${length}mm`, 15, 59);
-
-    requestAnimationFrame(renderLoop);
-  }
-
-  requestAnimationFrame(renderLoop);
-}
-
-/* ==========================================================================
-   5. ERA & DISCIPLINE FILTERING
+   4. ERA & DISCIPLINE FILTERING
    ========================================================================== */
 function initFilters() {
   const eraTabs = document.querySelectorAll('.era-tab');
@@ -483,7 +236,7 @@ function initFilters() {
 }
 
 /* ==========================================================================
-   6. LIGHTBOX MODAL (Full Resolution CAD & Diagrams)
+   5. LIGHTBOX MODAL (Full Resolution CAD & Diagrams)
    ========================================================================== */
 function openLightbox(src, caption) {
   const modal = document.getElementById('lightboxModal');
@@ -518,7 +271,7 @@ if (lightboxModalEl) {
 }
 
 /* ==========================================================================
-   7. PDF ORIGINAL DOCUMENT VIEWER (19 Pages Inspector)
+   6. PDF ORIGINAL DOCUMENT VIEWER (19 Pages Inspector)
    ========================================================================== */
 let currentPdfPage = 1;
 const totalPdfPages = 19;
@@ -592,7 +345,7 @@ function updatePdfPageDisplay() {
 }
 
 /* ==========================================================================
-   8. THEME TOGGLE (Dark Blueprint / Clean Light)
+   7. THEME TOGGLE (Dark Blueprint / Clean Light)
    ========================================================================== */
 function initThemeToggle() {
   const btn = document.getElementById('themeToggleBtn');
@@ -614,7 +367,7 @@ function initThemeToggle() {
 }
 
 /* ==========================================================================
-   9. CONTACT ACTIONS & TOAST MESSAGES
+   8. CONTACT ACTIONS & TOAST MESSAGES
    ========================================================================== */
 function copyContact(text) {
   navigator.clipboard.writeText(text).then(() => {
@@ -650,7 +403,7 @@ function showToast(msg) {
 }
 
 /* ==========================================================================
-   10. SMOOTH SCROLL & ACTIVE NAV SPY
+   9. SMOOTH SCROLL & ACTIVE NAV SPY
    ========================================================================== */
 function initSmoothScroll() {
   const sections = document.querySelectorAll('section[id]');
