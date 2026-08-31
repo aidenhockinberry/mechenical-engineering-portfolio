@@ -395,14 +395,26 @@
               <span class="tech-tag">Lorentz Force</span>
               <span class="tech-tag">Neodymium Array</span>
               <span class="tech-tag">Commutator Timing</span>
+              <span class="tech-tag" style="background: rgba(2, 132, 199, 0.15); border-color: var(--cyan-primary); color: var(--cyan-primary); font-weight: 600;">🎬 Physical Test Video</span>
             </div>
           </div>
 
           <div class="card-content-layout">
             <div class="card-media-side">
-              <div class="project-img-wrapper" onclick="openLightbox('assets/images/p18_img2_671.png', 'Brushed DC (BDC) Motor Prototype - Labeled Callouts: 9V Battery, Neodymium Magnet Array, Stability Tower & Brush Contacts, Lorentz Force Rotor')">
+              <div class="project-img-wrapper video-preview-wrapper" onclick="openVideoLightbox('assets/videos/dc_motor_prototype.mp4', 'Brushed DC (BDC) Motor Prototype - Live physical demonstration of Lorentz force rotation & commutator timing')">
                 <img src="assets/images/p18_img2_671.png" alt="Brushed DC Motor Prototype" class="project-img">
-                <button class="img-inspect-btn">🔍 Inspect Electromechanical Rig</button>
+                <div class="video-play-overlay">
+                  <div class="play-icon-pulse">▶</div>
+                  <span class="video-play-label">Watch Motor in Action</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                <button class="btn btn-outline" style="flex: 1; font-size: 0.72rem; padding: 0.35rem 0.5rem;" onclick="openVideoLightbox('assets/videos/dc_motor_prototype.mp4', 'Brushed DC (BDC) Motor Prototype - Live physical demonstration of Lorentz force rotation & commutator timing')">
+                  🎬 Play Test Video
+                </button>
+                <button class="btn btn-outline" style="flex: 1; font-size: 0.72rem; padding: 0.35rem 0.5rem;" onclick="openLightbox('assets/images/p18_img2_671.png', 'Brushed DC (BDC) Motor Prototype - Labeled Callouts: 9V Battery, Neodymium Magnet Array, Stability Tower & Brush Contacts, Lorentz Force Rotor')">
+                  🔍 Inspect Rig Blueprint
+                </button>
               </div>
             </div>
 
