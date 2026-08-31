@@ -342,6 +342,14 @@ body::before {
   border-color: var(--cyan-primary);
 }
 
+.nav-contact-icon {
+  display: none;
+}
+
+.nav-contact-text {
+  display: inline;
+}
+
 .mobile-menu-btn {
   display: none;
 }
@@ -1611,20 +1619,67 @@ body::before {
   }
 
   .nav-container {
-    padding: 0 1rem;
+    padding: 0 0.85rem;
     gap: 0.5rem;
   }
 
   .nav-actions {
-    gap: 0.5rem;
+    gap: 0.45rem;
+    flex-shrink: 0;
+  }
+
+  .brand-logo {
+    flex: 1;
+    min-width: 0;
+    margin-right: 0.25rem;
+  }
+
+  .brand-text {
+    min-width: 0;
+    overflow: hidden;
   }
 
   .brand-name {
-    font-size: 1rem;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .brand-sub {
     font-size: 0.65rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-contact-text {
+    display: none !important;
+  }
+
+  .nav-contact-icon {
+    display: inline-flex !important;
+    font-size: 1.05rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-contact-btn {
+    width: 38px;
+    height: 38px;
+    padding: 0 !important;
+    min-width: 38px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+  }
+
+  .btn-icon-only {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
   }
 
   .nav-links {
