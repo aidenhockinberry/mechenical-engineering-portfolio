@@ -9,6 +9,7 @@
   <meta name="author" content="Aiden Hockinberry">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -36,10 +37,13 @@
         <button class="btn btn-icon-only" id="themeToggleBtn" title="Toggle Blueprint / Dark Theme" aria-label="Toggle Theme">
           <span id="themeIcon">☀️</span>
         </button>
+        <button class="btn btn-primary" id="exportPdfBtn" title="Generate & Download PDF Portfolio with QR Codes" onclick="openExportStudioModal()">
+          <span>🖨️ Export PDF Portfolio</span>
+        </button>
         <button class="btn btn-outline" id="pdfViewerBtn" title="View Original PDF Pages">
           <span>📄 View PDF Pages</span>
         </button>
-        <a href="#contact" class="btn btn-primary">
+        <a href="#contact" class="btn btn-outline">
           <span>Get in Touch</span>
         </a>
       </div>
@@ -1040,7 +1044,8 @@
       <div class="footer-text">
         © 2026 Aiden Hockinberry — Mechanical Engineering & Prototyping Portfolio.
       </div>
-      <div style="display: flex; gap: 1rem;">
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <button class="btn btn-primary" style="font-size: 0.75rem; padding: 0.35rem 0.85rem;" onclick="openExportStudioModal()">🖨️ Export PDF Portfolio</button>
         <button class="btn btn-outline" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;" onclick="window.scrollTo({top:0, behavior:'smooth'})">▲ Back to Top</button>
       </div>
     </div>
@@ -1078,6 +1083,502 @@
           <button class="btn btn-outline" onclick="prevPdfPage()">◀ Previous Page</button>
           <span id="pageNumberIndicator" style="font-family: var(--font-mono); font-size: 0.85rem; display: flex; align-items: center;">Page 1 of 19</span>
           <button class="btn btn-outline" onclick="nextPdfPage()">Next Page ▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Studio Modal (Printable PDF Portfolio & QR Studio) -->
+  <div class="modal-backdrop" id="exportStudioModal">
+    <div class="lightbox-modal export-studio-modal">
+      <div class="modal-header">
+        <div class="modal-title">📄 Printable PDF Portfolio & QR Studio</div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button class="btn btn-primary" id="triggerPrintBtn" onclick="triggerPrintPortfolio()">
+            <span>🖨️ Download / Print PDF</span>
+          </button>
+          <button class="modal-close-btn" onclick="closeExportStudioModal()">&times;</button>
+        </div>
+      </div>
+      <div class="export-studio-body">
+        <div class="export-config-sidebar">
+          <h3 class="config-sidebar-title">⚙️ Export Settings</h3>
+          
+          <div class="form-group">
+            <label class="form-label" for="exportBaseUrl">LIVE QR BASE URL</label>
+            <input type="text" id="exportBaseUrl" class="form-input" value="https://aidenhockinberry.github.io/mechenical-engineering-portfolio/" placeholder="https://..." oninput="updateQrCodes(this.value)">
+            <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 0.25rem;">QR codes automatically direct readers to online 3D CAD & live simulations.</span>
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem;">
+            <label class="form-label">INCLUDE PORTFOLIO SHEETS</label>
+            <div class="sheet-toggle-list">
+              <label class="sheet-toggle-item">
+                <input type="checkbox" id="toggleSheetCover" checked onchange="togglePrintSheet('print-sheet-cover', this.checked)">
+                <span>Page 1: Cover & Engineering Summary</span>
+              </label>
+              <label class="sheet-toggle-item">
+                <input type="checkbox" id="toggleSheetEra1" checked onchange="togglePrintSheet('print-sheet-era1', this.checked)">
+                <span>Page 2: Era 1 — 3D Printing & Mechatronics</span>
+              </label>
+              <label class="sheet-toggle-item">
+                <input type="checkbox" id="toggleSheetEra2" checked onchange="togglePrintSheet('print-sheet-era2', this.checked)">
+                <span>Page 3: Era 2 — Virtual Prototyping & Twins</span>
+              </label>
+              <label class="sheet-toggle-item">
+                <input type="checkbox" id="toggleSheetEra3" checked onchange="togglePrintSheet('print-sheet-era3', this.checked)">
+                <span>Page 4: Era 3 — Physical Foundations</span>
+              </label>
+              <label class="sheet-toggle-item">
+                <input type="checkbox" id="toggleSheetSkills" checked onchange="togglePrintSheet('print-sheet-skills', this.checked)">
+                <span>Page 5: Competencies & Toolchain Matrix</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="print-instruction-box">
+            <div style="font-weight: 700; color: var(--cyan-primary); margin-bottom: 0.35rem;">💡 PDF Print Instructions:</div>
+            <ol style="padding-left: 1.1rem; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.55;">
+              <li>Click <strong>"Download / Print PDF"</strong> above.</li>
+              <li>Set Destination to <strong>"Save as PDF"</strong>.</li>
+              <li>Set Paper Size to <strong>Letter</strong> or <strong>A4</strong>.</li>
+              <li>Enable <strong>"Background graphics"</strong> to render blueprint borders and photo frames cleanly.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="export-preview-container" id="exportPreviewContainer">
+          <div class="preview-zoom-label">PRINT SHEET LIVE PREVIEW (LETTER / A4)</div>
+          
+          <!-- PRINTABLE PORTFOLIO CONTAINER -->
+          <div class="printable-portfolio" id="printablePortfolio">
+
+            <!-- SHEET 1: COVER & EXECUTIVE SUMMARY -->
+            <div class="print-sheet" id="print-sheet-cover">
+              <div class="print-header">
+                <div>
+                  <div class="print-brand-badge">AH // MECHANICAL ENGINEERING PORTFOLIO</div>
+                  <h1 class="print-title">Aiden Hockinberry</h1>
+                  <div class="print-subtitle">Mechanical Engineer, Rapid Prototyper & Systems Builder</div>
+                </div>
+                <div class="print-header-meta">
+                  <div><strong>Email:</strong> aidenhockinberry@gmail.com</div>
+                  <div><strong>Status:</strong> Active Prototyping & Design</div>
+                  <div><strong>Focus:</strong> CAD, Additive Mfg, Kinematics</div>
+                </div>
+              </div>
+
+              <div class="print-metrics-bar">
+                <div class="print-metric-box">
+                  <div class="print-metric-num">70+</div>
+                  <div class="print-metric-lbl">Piston Engines</div>
+                </div>
+                <div class="print-metric-box">
+                  <div class="print-metric-num">14+</div>
+                  <div class="print-metric-lbl">Escapement CADs</div>
+                </div>
+                <div class="print-metric-box">
+                  <div class="print-metric-num">9,243</div>
+                  <div class="print-metric-lbl">m/s Orbital ΔV</div>
+                </div>
+                <div class="print-metric-box">
+                  <div class="print-metric-num">0.22mm</div>
+                  <div class="print-metric-lbl">FDM Air Gap</div>
+                </div>
+              </div>
+
+              <div class="print-cover-grid">
+                <div class="print-cover-bio">
+                  <div class="print-section-lead">
+                    “I have been doing Mechanical Engineering my whole life.”
+                  </div>
+                  <p class="print-body-text">
+                    I am an engineering student dedicated to solving complex kinematic problems, creating functional physical prototypes, and verifying mechanical designs through digital twin simulations. My work spans hands-on mechanical assemblies, parametric CAD modeling in Autodesk Fusion 360, tolerance-critical 3D printing on Creality machines, and physics sandbox testing.
+                  </p>
+
+                  <div class="print-highlights-box">
+                    <div class="print-hl-title">CORE ENGINEERING DOMAINS</div>
+                    <ul class="print-hl-list">
+                      <li><strong>CAD & Rapid Prototyping:</strong> Parametric solid modeling, exploded assemblies, tolerance-budgeted snap-fits (0.22mm).</li>
+                      <li><strong>Digital Twin Simulations:</strong> High-frequency kinematic balancing across 70+ piston engine variations and orbital staging mechanics.</li>
+                      <li><strong>Electromechanical Systems:</strong> Hand-wound brushed DC motor armatures, gravity-driven escapement clockworks, and logic-timed robotic gaits.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="print-cover-sidebar">
+                  <div class="print-portrait-frame">
+                    <img src="assets/images/p1_img3_491.jpeg" alt="Aiden Hockinberry" class="print-portrait-img">
+                  </div>
+
+                  <div class="print-qr-card">
+                    <div class="print-qr-img-box" id="qr-cover"></div>
+                    <div class="print-qr-info">
+                      <div class="print-qr-title">SCAN FOR LIVE SITE</div>
+                      <div class="print-qr-desc">View interactive 3D CAD models, animations & digital twin sandbox.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="print-footer">
+                <span>Aiden Hockinberry — Mechanical Engineering Portfolio</span>
+                <span>Page 1 // Executive Summary & Cover</span>
+              </div>
+            </div>
+
+            <!-- SHEET 2: ERA 1 — 3D PRINTING, CAD & MECHATRONICS -->
+            <div class="print-sheet" id="print-sheet-era1">
+              <div class="print-sheet-tag">ERA 01 // 3D PRINTING, CAD MODELING & MECHATRONICS</div>
+              <h2 class="print-sheet-title">Fusion 360 Design & Additive Manufacturing</h2>
+              <p class="print-sheet-desc">
+                Transforming theoretical mechanics and digital simulations into physical realities using Autodesk Fusion 360, TinkerCAD, and Creality 3D printers for high-precision component fabrication, tolerance testing, and functional electromechanical prototypes.
+              </p>
+
+              <div class="print-projects-grid">
+                <!-- Project 1 & 2 -->
+                <div class="print-proj-row">
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">1. Fusion Design: Parametric CAD & Physical Build</div>
+                    <div class="print-proj-meta">Autodesk Fusion 360 • Parametric Constraints • Woodworking & Finish</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p11_img1_597.png" alt="Chair CAD" class="print-thumb">
+                      <img src="assets/images/p11_img2_598.png" alt="Table Real" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Engineered a multi-part ergonomic chair assembly and cross-braced dual-tone console table fully translated from 3D parametric CAD into high-fidelity physical builds.
+                    </p>
+                  </div>
+
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">2. Wind-Powered Kinematic Transport Prototype</div>
+                    <div class="print-proj-meta">Fluid Dynamics • Impeller Pitch Tuning • 90° Bevel Linkage</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p12_img1_604.png" alt="Wind Rover" class="print-thumb">
+                      <img src="assets/images/p12_img3_607.png" alt="Propeller Pitch" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Engineered a wind-driven rover harnessing ambient airflow. Developed custom 3D-printed multi-blade impellers (Attempt 1 vs. 2) and 90° torque transfer linkages.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Project 3: Snap-Fit Study Table -->
+                <div class="print-proj-full">
+                  <div class="print-proj-title">3. Integrated Fastening Systems: The Pocket Connect 4 Study</div>
+                  <div class="print-proj-meta">Cantilever Snap-Fit • 0.22mm Tolerance Air Gap • Ender 3 V3 KE</div>
+                  <div class="print-table-layout">
+                    <div style="width: 32%;">
+                      <img src="assets/images/p13_img3_623.png" alt="Exploded View" class="print-thumb-single">
+                    </div>
+                    <div style="width: 66%;">
+                      <table class="print-table">
+                        <thead>
+                          <tr><th>Component</th><th>Mechanism</th><th>Specification</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>Cantilever Lid</td><td>Snap-Top Flexure</td><td>Engineered deflection tooth with tactile retention</td></tr>
+                          <tr><td>Play Grid Core</td><td>Column Guides</td><td>Precision anti-jam slot chamfers</td></tr>
+                          <tr><td>Assembly Base</td><td>Friction Housing</td><td><strong>0.22mm air gap tolerance</strong> for repeatable print fit</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Project 4 & 5: Escapement & Motor -->
+                <div class="print-proj-row">
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">4. Gravity Escapement & Ratchet System</div>
+                    <div class="print-proj-meta">14 CAD Iterations • 5 Chain Generations (V1-V5) • Prototype Graveyard</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p14_img1_630.png" alt="Escapement Apparatus" class="print-thumb">
+                      <img src="assets/images/p16_img1_653.png" alt="Graveyard" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Engineered a gravity-powered pendulum clockwork mechanism with optimized pallet tooth angle and 5 chain generations to achieve deadbeat impulse transfer.
+                    </p>
+                  </div>
+
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">5. Brushed DC Motor Prototype</div>
+                    <div class="print-proj-meta">Lorentz Force • Hand-Wound Armature • Neodymium Magnetic Array</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p18_img2_671.png" alt="BDC Motor" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Constructed a functional DC motor with high-conductivity enamel magnet wire, spring-tensioned copper brushes, and split-ring commutator timing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="print-sheet-qr-strip">
+                <div class="print-qr-img-box mini" id="qr-era1"></div>
+                <div class="print-qr-strip-text">
+                  <strong>SCAN FOR ERA 01 3D CAD & INTERACTIVE VIEWS:</strong>
+                  <span>Inspect full 3D CAD exploded views, chain evolution, and escapement tolerances online.</span>
+                </div>
+              </div>
+
+              <div class="print-footer">
+                <span>Aiden Hockinberry — Mechanical Engineering Portfolio</span>
+                <span>Page 2 // Era 1: 3D Printing & Mechatronics</span>
+              </div>
+            </div>
+
+            <!-- SHEET 3: ERA 2 — VIRTUAL SIMULATION & DIGITAL TWINS -->
+            <div class="print-sheet" id="print-sheet-era2">
+              <div class="print-sheet-tag">ERA 02 // THE VIRTUAL ERA & DIGITAL TWINS</div>
+              <h2 class="print-sheet-title">Engineering Beyond Physical Constraints & Digital Twins</h2>
+              <p class="print-sheet-desc">
+                Transitioning from physical constraints to high-fidelity physics engines (Kerbal Space Program, Scrap Mechanic, modded Minecraft) to validate kinematics, orbital trajectory staging, and multi-axis logic loops prior to physical fabrication.
+              </p>
+
+              <div class="print-projects-grid">
+                <!-- Project 6 & 7 -->
+                <div class="print-proj-row">
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">6. 70+ Piston Engine Iteration Lab</div>
+                    <div class="print-proj-meta">70+ Engine Builds • Crankshaft Phase Balancing • Timing Efficiency</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p6_img1_521.png" alt="Engine 1" class="print-thumb">
+                      <img src="assets/images/p6_img2_522.png" alt="Engine 2" class="print-thumb">
+                      <img src="assets/images/p6_img3_523.png" alt="Engine 3" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Designed and stress-tested over 70 custom piston configurations (inline, radial, V-type, boxer) to optimize ignition timing, eliminate torsional resonance, and maximize torque.
+                    </p>
+                  </div>
+
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">7. Mechanical Automotive Chassis & Drivetrain</div>
+                    <div class="print-proj-meta">Universal Joints • Double Wishbone Suspension • Ackerman Geometry</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p7_img3_554.png" alt="Auto Front" class="print-thumb">
+                      <img src="assets/images/p7_img5_557.png" alt="Suspension U-Joint" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Engineered a complete chassis integrating central piston power, independent damped suspension, and U-joint drivetrain to maintain torque transfer across uneven terrain.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Project 8: Mun Mission Case Study -->
+                <div class="print-proj-full">
+                  <div class="print-proj-title">8. Case Study: Simulated Mun Mission Spacecraft Architecture</div>
+                  <div class="print-proj-meta">Kerbal Space Program • 5-Stage Rocket • Total ΔV: 9,243 m/s • Tsiolkovsky Equation</div>
+                  <div class="print-table-layout">
+                    <div style="width: 32%;">
+                      <img src="assets/images/p8_img3_569.jpeg" alt="Rocket Staging" class="print-thumb-single">
+                    </div>
+                    <div style="width: 66%;">
+                      <table class="print-table">
+                        <thead>
+                          <tr><th>Mission Metric</th><th>Specification</th><th>Engineering Purpose</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><strong>Total ΔV Budget</strong></td><td><strong>9,243 m/s</strong></td><td>Sufficient for LKO, Trans-Munar, Landing, & Earth Reentry</td></tr>
+                          <tr><td><strong>Vehicle Part Count</strong></td><td>147 Components</td><td>Structural rigidity and aerodynamic fairing optimization</td></tr>
+                          <tr><td><strong>Staging Profile</strong></td><td>5 Discrete Stages</td><td>Maximizes vacuum Isp by discarding dry booster mass</td></tr>
+                          <tr><td><strong>Ascent Trajectory</strong></td><td>Gravity Turn @ 70km</td><td>Trades vertical climb for horizontal orbital insertion velocity</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Project 9: Biomimetic Walking Robot -->
+                <div class="print-proj-full">
+                  <div class="print-proj-title">9. Biomimetic Robotics & Logic-Driven Kinematics</div>
+                  <div class="print-proj-meta">Boolean State Machine (AND/OR/XOR) • Microcontroller Timing • Walking Gait Coordination</div>
+                  <div class="print-thumb-row" style="margin-bottom: 0.4rem;">
+                    <img src="assets/images/p10_img1_585.jpeg" alt="Gait Robot" class="print-thumb">
+                    <img src="assets/images/p10_img4_588.jpeg" alt="Logic Matrix" class="print-thumb">
+                  </div>
+                  <p class="print-proj-summary">
+                    Engineered a multi-legged walking robot integrating on-board digital logic state machines to coordinate joint phase shifts and prevent joint binding during continuous linear gaits.
+                  </p>
+                </div>
+              </div>
+
+              <div class="print-sheet-qr-strip">
+                <div class="print-qr-img-box mini" id="qr-era2"></div>
+                <div class="print-qr-strip-text">
+                  <strong>SCAN FOR ERA 02 70+ PISTON ENGINES & KSP FLIGHT STAGES:</strong>
+                  <span>Inspect all 27 engine block CADs and interactive 5-stage spacecraft breakdown online.</span>
+                </div>
+              </div>
+
+              <div class="print-footer">
+                <span>Aiden Hockinberry — Mechanical Engineering Portfolio</span>
+                <span>Page 3 // Era 2: Virtual Prototyping & Digital Twins</span>
+              </div>
+            </div>
+
+            <!-- SHEET 4: ERA 3 — PHYSICAL FOUNDATIONS -->
+            <div class="print-sheet" id="print-sheet-era3">
+              <div class="print-sheet-tag">ERA 03 // KINEMATIC FOUNDATIONS & EARLY PROTOTYPES</div>
+              <h2 class="print-sheet-title">Physical Prototyping & Kinematic Foundations</h2>
+              <p class="print-sheet-desc">
+                Hands-on tactile exploration in gear ratios, structural rigidity, torque balance, and dynamic equilibrium. Building functional proof-of-concept machines from raw structural components.
+              </p>
+
+              <div class="print-projects-grid">
+                <!-- Project 10 -->
+                <div class="print-proj-full">
+                  <div class="print-proj-title">10. Linear Transport System Prototype</div>
+                  <div class="print-proj-meta">Synchronized Dual-Motor Drive • Belt Tension Tuning • Reinforced Cross-Bracing</div>
+                  <div class="print-table-layout">
+                    <div style="width: 38%;">
+                      <img src="assets/images/p2_img1_497.png" alt="Linear Transport" class="print-thumb-single">
+                    </div>
+                    <div style="width: 60%; font-size: 0.8rem; line-height: 1.5; color: #1e293b;">
+                      <p><strong>Design Challenge:</strong> Dynamic carriage instability and belt tooth jumping during high-cycle directional reversals.</p>
+                      <p><strong>Engineering Solution:</strong> Implemented dual-motor synchronized drive to balance track load distribution, reinforced Technic beam cross-bracing to absorb vibration, and tuned pulley drive-train.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Project 11 & 12 -->
+                <div class="print-proj-row">
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">11. Mechanical Logic & Linkage Exploration</div>
+                    <div class="print-proj-meta">Spatial Motion Translation • Rotary-to-Linear • Tolerance Budgeting</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p3_img2_504.png" alt="Linkage" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Investigated spatial motion translation and mechanical timing through interconnected gear linkages, developing an intuitive foundation for backlash and multi-pivot pin tolerances.
+                    </p>
+                  </div>
+
+                  <div class="print-proj-card">
+                    <div class="print-proj-title">12. Self-Stabilizing Dynamic Rolling Structure</div>
+                    <div class="print-proj-meta">Rotational Inertia • Radial Truss Symmetry • 3D Wireframe CAD</div>
+                    <div class="print-thumb-row">
+                      <img src="assets/images/p4_img2_510.jpeg" alt="Rolling Physical" class="print-thumb">
+                      <img src="assets/images/p4_img4_512.png" alt="Rolling CAD" class="print-thumb">
+                    </div>
+                    <p class="print-proj-summary">
+                      Engineered a self-stabilizing rolling ring utilizing radial truss spoke geometry and perimeter mass concentration ($I = mr^2$) to maintain rotational momentum under dynamic perturbation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="print-sheet-qr-strip">
+                <div class="print-qr-img-box mini" id="qr-era3"></div>
+                <div class="print-qr-strip-text">
+                  <strong>SCAN FOR ERA 03 PHYSICAL FOUNDATIONS & VIDEOS:</strong>
+                  <span>Inspect early kinetic linkage assemblies and high-resolution CAD wireframes.</span>
+                </div>
+              </div>
+
+              <div class="print-footer">
+                <span>Aiden Hockinberry — Mechanical Engineering Portfolio</span>
+                <span>Page 4 // Era 3: Physical Foundations</span>
+              </div>
+            </div>
+
+            <!-- SHEET 5: COMPETENCIES & TOOLCHAIN MATRIX -->
+            <div class="print-sheet" id="print-sheet-skills">
+              <div class="print-sheet-tag">ENGINEERING MATRIX // SKILLS & TOOLCHAIN</div>
+              <h2 class="print-sheet-title">Engineering Competencies & Toolchain Matrix</h2>
+              <p class="print-sheet-desc">
+                Comprehensive interdisciplinary toolkit spanning computer-aided design, additive prototyping, electromechanical assembly, digital twin simulations, and kinematic optimization.
+              </p>
+
+              <div class="print-skills-grid">
+                <div class="print-skill-card">
+                  <div class="print-skill-title">📐 CAD & Modeling</div>
+                  <ul class="print-skill-list">
+                    <li>Autodesk Fusion 360 (Parametric Solids)</li>
+                    <li>TinkerCAD Rapid Concepting</li>
+                    <li>Assembly Mates & Clearance Fits</li>
+                    <li>0.22mm Tolerance Analysis</li>
+                    <li>Exploded Assembly Diagrams</li>
+                  </ul>
+                </div>
+
+                <div class="print-skill-card">
+                  <div class="print-skill-title">🖨️ Additive & Fabrication</div>
+                  <ul class="print-skill-list">
+                    <li>Creality Ender 3 V3 KE Calibration</li>
+                    <li>FDM Slicing & Cura Print Profiles</li>
+                    <li>PLA & Composite Material Tuning</li>
+                    <li>Cantilever Snap-Fits & Flexures</li>
+                    <li>Woodworking Joinery & Finishing</li>
+                  </ul>
+                </div>
+
+                <div class="print-skill-card">
+                  <div class="print-skill-title">⚙️ Kinematics & Mechatronics</div>
+                  <ul class="print-skill-list">
+                    <li>Escapements & Horological Timing</li>
+                    <li>Ratchet & Pawl Drivetrains</li>
+                    <li>Hand-Wound BDC Motor Armatures</li>
+                    <li>Universal Joint Transmissions</li>
+                    <li>Rotary-to-Linear Motion Linkages</li>
+                  </ul>
+                </div>
+
+                <div class="print-skill-card">
+                  <div class="print-skill-title">🌌 Virtual Simulation</div>
+                  <ul class="print-skill-list">
+                    <li>Digital Twin Rapid Iteration</li>
+                    <li>70+ Piston Engine Dynamic Builds</li>
+                    <li>Kerbal Space Program (KSP) ΔV Modeling</li>
+                    <li>Scrap Mechanic Physics Testing</li>
+                    <li>Orbital Staging & Gravity Turns</li>
+                  </ul>
+                </div>
+
+                <div class="print-skill-card">
+                  <div class="print-skill-title">⚡ Logic & State Control</div>
+                  <ul class="print-skill-list">
+                    <li>Boolean Logic Gates (AND, OR, XOR)</li>
+                    <li>Finite State Machine Architecture</li>
+                    <li>Sequential Multi-Axis Timing</li>
+                    <li>Walking Gait Coordination</li>
+                    <li>Closed-Loop Feedback Intuition</li>
+                  </ul>
+                </div>
+
+                <div class="print-skill-card">
+                  <div class="print-skill-title">🔬 Engineering Methods</div>
+                  <ul class="print-skill-list">
+                    <li>Failure Point & Stress Identification</li>
+                    <li>Rapid Iterative Prototyping Cycle</li>
+                    <li>Momentum & Rotational Inertia Balance</li>
+                    <li>Fluid Dynamic Propeller Pitch Tuning</li>
+                    <li>Prototype Graveyard Metric Tracking</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="print-contact-strip">
+                <div>
+                  <div style="font-weight: 700; font-size: 0.95rem; color: #0f172a;">Aiden Hockinberry — Mechanical Engineering</div>
+                  <div style="font-size: 0.8rem; color: #475569; font-family: var(--font-mono);">Email: aidenhockinberry@gmail.com</div>
+                  <div style="font-size: 0.75rem; color: #64748b;">Available for university engineering programs, prototype collaboration, and mechanical engineering opportunities.</div>
+                </div>
+                <div class="print-qr-card mini">
+                  <div class="print-qr-img-box mini" id="qr-skills"></div>
+                  <div class="print-qr-info">
+                    <div class="print-qr-title">SCAN TO CONNECT</div>
+                    <div class="print-qr-desc">View full portfolio online</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="print-footer">
+                <span>Aiden Hockinberry — Mechanical Engineering Portfolio</span>
+                <span>Page 5 // Competencies & Toolchain Matrix</span>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

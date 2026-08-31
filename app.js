@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFilters();
   initThemeToggle();
   initPdfModal();
+  initExportStudio();
   initSmoothScroll();
 });
 
@@ -259,6 +260,7 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeLightbox();
     closePdfDocModal();
+    closeExportStudioModal();
   }
 });
 
@@ -403,7 +405,114 @@ function showToast(msg) {
 }
 
 /* ==========================================================================
-   9. SMOOTH SCROLL & ACTIVE NAV SPY
+   10. PRINTABLE PDF PORTFOLIO & QR CODE STUDIO
+   ========================================================================== */
+function initExportStudio() {
+  const modal = document.getElementById('exportStudioModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeExportStudioModal();
+    });
+  }
+
+  // Pre-generate QR codes on page load
+  const baseUrlInput = document.getElementById('exportBaseUrl');
+  const initialUrl = baseUrlInput ? baseUrlInput.value : 'https://aidenhockinberry.github.io/mechenical-engineering-portfolio/';
+  updateQrCodes(initialUrl);
+}
+
+function openExportStudioModal() {
+  const modal = document.getElementById('exportStudioModal');
+  if (modal) {
+    modal.classList.add('open');
+    const baseUrlInput = document.getElementById('exportBaseUrl');
+    const url = baseUrlInput ? baseUrlInput.value : 'https://aidenhockinberry.github.io/mechenical-engineering-portfolio/';
+    updateQrCodes(url);
+  }
+}
+
+function closeExportStudioModal() {
+  const modal = document.getElementById('exportStudioModal');
+  if (modal) modal.classList.remove('open');
+}
+
+function togglePrintSheet(sheetId, isChecked) {
+  const sheet = document.getElementById(sheetId);
+  if (!sheet) return;
+  
+  if (isChecked) {
+    sheet.classList.remove('hidden-for-print');
+    sheet.style.display = 'flex';
+  } else {
+    sheet.classList.add('hidden-for-print');
+    sheet.style.display = 'none';
+  }
+}
+
+function triggerPrintPortfolio() {
+  const baseUrlInput = document.getElementById('exportBaseUrl');
+  const url = baseUrlInput ? baseUrlInput.value : 'https://aidenhockinberry.github.io/mechenical-engineering-portfolio/';
+  updateQrCodes(url);
+  showToast('📄 Preparing printable PDF portfolio layout...');
+  
+  setTimeout(() => {
+    window.print();
+  }, 250);
+}
+
+function updateQrCodes(baseUrl) {
+  if (!baseUrl || !baseUrl.trim()) {
+    baseUrl = 'https://aidenhockinberry.github.io/mechenical-engineering-portfolio/';
+  }
+  baseUrl = baseUrl.trim();
+  const cleanBase = (baseUrl.endsWith('/') || baseUrl.includes('#')) ? baseUrl : baseUrl + '/';
+
+  const qrTargets = [
+    { id: 'qr-cover', url: cleanBase },
+    { id: 'qr-era1', url: cleanBase.replace(/#.*$/, '') + '#manufacturing-era' },
+    { id: 'qr-era2', url: cleanBase.replace(/#.*$/, '') + '#virtual-era' },
+    { id: 'qr-era3', url: cleanBase.replace(/#.*$/, '') + '#early-era' },
+    { id: 'qr-skills', url: cleanBase.replace(/#.*$/, '') + '#skills' }
+  ];
+
+  qrTargets.forEach(target => {
+    const container = document.getElementById(target.id);
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    // Render using QRCode.js if available
+    let rendered = false;
+    if (typeof QRCode !== 'undefined') {
+      try {
+        new QRCode(container, {
+          text: target.url,
+          width: 120,
+          height: 120,
+          colorDark: "#0f172a",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+        rendered = true;
+      } catch (err) {
+        console.warn('QRCode.js rendering error, using fallback', err);
+      }
+    }
+
+    // High-resolution API Fallback if QRCode.js isn't ready
+    if (!rendered || !container.hasChildNodes()) {
+      container.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=0&data=${encodeURIComponent(target.url)}`;
+      img.alt = `QR Code for ${target.url}`;
+      img.loading = 'lazy';
+      container.appendChild(img);
+    }
+  });
+}
+
+/* ==========================================================================
+   11. SMOOTH SCROLL & ACTIVE NAV SPY
    ========================================================================== */
 function initSmoothScroll() {
   const sections = document.querySelectorAll('section[id]');
@@ -429,3 +538,5 @@ function initSmoothScroll() {
     });
   });
 }
+
+
