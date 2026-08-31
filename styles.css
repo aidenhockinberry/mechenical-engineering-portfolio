@@ -83,6 +83,13 @@
   --border-color-hover: rgba(14, 165, 233, 0.5);
   --border-accent: rgba(2, 132, 199, 0.7);
 
+  --cyan-primary: #0284c7;
+  --cyan-glow: rgba(2, 132, 199, 0.2);
+  --blue-primary: #0369a1;
+  --orange-accent: #ea580c;
+  --orange-glow: rgba(234, 88, 12, 0.2);
+  --emerald-accent: #059669;
+
   --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-muted: #64748b;
@@ -401,6 +408,12 @@ body::before {
 
 .hero-title-accent {
   background: linear-gradient(135deg, #ffffff 0%, var(--cyan-primary) 60%, var(--blue-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .hero-title-accent {
+  background: linear-gradient(135deg, #0f172a 0%, #0284c7 50%, #0369a1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
