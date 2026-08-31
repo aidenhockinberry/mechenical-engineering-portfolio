@@ -241,16 +241,47 @@ function initFilters() {
 function openLightbox(src, caption) {
   const modal = document.getElementById('lightboxModal');
   const img = document.getElementById('lightboxImg');
+  const video = document.getElementById('lightboxVideo');
+  const titleEl = document.getElementById('lightboxTitle');
   const captionEl = document.getElementById('lightboxCaption');
   if (!modal || !img) return;
 
+  if (video) {
+    video.pause();
+    video.style.display = 'none';
+    video.src = '';
+  }
+  img.style.display = 'block';
   img.src = src;
+  if (titleEl) titleEl.textContent = 'High-Resolution Blueprint & Build';
   if (captionEl) captionEl.textContent = caption || 'High-Resolution CAD / Prototype Diagram';
   modal.classList.add('open');
 }
 
+function openVideoLightbox(videoSrc, caption) {
+  const modal = document.getElementById('lightboxModal');
+  const img = document.getElementById('lightboxImg');
+  const video = document.getElementById('lightboxVideo');
+  const titleEl = document.getElementById('lightboxTitle');
+  const captionEl = document.getElementById('lightboxCaption');
+  if (!modal || !video) return;
+
+  if (img) img.style.display = 'none';
+  video.style.display = 'block';
+  video.src = videoSrc;
+  if (titleEl) titleEl.textContent = '🎬 Live Prototype Testing Video';
+  if (captionEl) captionEl.textContent = caption || 'Live Physical Prototype Testing Demonstration';
+  modal.classList.add('open');
+  video.play().catch(err => console.log('Autoplay deferred until user interaction'));
+}
+
 function closeLightbox() {
   const modal = document.getElementById('lightboxModal');
+  const video = document.getElementById('lightboxVideo');
+  if (video) {
+    video.pause();
+    video.src = '';
+  }
   if (modal) modal.classList.remove('open');
 }
 

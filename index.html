@@ -736,9 +736,20 @@
 
           <div class="card-content-layout">
             <div class="card-media-side">
-              <div class="project-img-wrapper" onclick="openLightbox('assets/images/p2_img1_497.png', 'Linear Transport System Prototype - Aiden Hockinberry testing synchronized dual-motor belt assembly')">
+              <div class="project-img-wrapper video-preview-wrapper" onclick="openVideoLightbox('assets/videos/linear_transport_prototype.mp4', 'Linear Transport System Prototype - Live dynamic physical testing of synchronized dual-motor carriage')">
                 <img src="assets/images/p2_img1_497.png" alt="Linear Transport System Prototype" class="project-img">
-                <button class="img-inspect-btn">🔍 Zoom Blueprint & Build</button>
+                <div class="video-play-overlay">
+                  <div class="play-icon-pulse">▶</div>
+                  <span class="video-play-label">Watch Prototype Video</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                <button class="btn btn-outline" style="flex: 1; font-size: 0.72rem; padding: 0.35rem 0.5rem;" onclick="openVideoLightbox('assets/videos/linear_transport_prototype.mp4', 'Linear Transport System Prototype - Live dynamic physical testing of synchronized dual-motor carriage')">
+                  🎬 Play Test Video
+                </button>
+                <button class="btn btn-outline" style="flex: 1; font-size: 0.72rem; padding: 0.35rem 0.5rem;" onclick="openLightbox('assets/images/p2_img1_497.png', 'Linear Transport System Prototype - Aiden Hockinberry testing synchronized dual-motor belt assembly')">
+                  🔍 View Blueprint
+                </button>
               </div>
             </div>
 
@@ -1057,6 +1068,7 @@
       </div>
       <div class="modal-body">
         <img src="" alt="High resolution inspection" class="modal-image" id="lightboxImg">
+        <video src="" controls playsinline class="modal-video" id="lightboxVideo" style="display: none; max-width: 100%; max-height: 75vh; border-radius: var(--radius-sm);"></video>
         <div class="modal-caption" id="lightboxCaption"></div>
       </div>
     </div>
