@@ -40,9 +40,6 @@
         <button class="btn btn-primary" id="exportPdfBtn" title="Generate & Download PDF Portfolio with QR Codes" onclick="openExportStudioModal()">
           <span>🖨️ Export PDF Portfolio</span>
         </button>
-        <button class="btn btn-outline" id="pdfViewerBtn" title="View Original PDF Pages">
-          <span>📄 View PDF Pages</span>
-        </button>
         <a href="#contact" class="btn btn-outline">
           <span>Get in Touch</span>
         </a>
@@ -1065,28 +1062,6 @@
     </div>
   </div>
 
-  <!-- PDF Document View Modal (Side-by-side Page Inspector) -->
-  <div class="modal-backdrop" id="pdfDocModal">
-    <div class="lightbox-modal" style="max-width: 1200px;">
-      <div class="modal-header">
-        <div class="modal-title">Original Portfolio Document (19 Pages)</div>
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <select id="pageSelect" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); padding: 0.3rem 0.6rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.8rem;" onchange="changePdfPage(this.value)">
-            <!-- Populated via JS for Pages 1-19 -->
-          </select>
-          <button class="modal-close-btn" onclick="closePdfDocModal()">&times;</button>
-        </div>
-      </div>
-      <div class="modal-body">
-        <img src="assets/pages/page_1.png" alt="PDF Page" class="modal-image" id="pdfPageDisplayImg" style="max-height: 75vh;">
-        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-          <button class="btn btn-outline" onclick="prevPdfPage()">◀ Previous Page</button>
-          <span id="pageNumberIndicator" style="font-family: var(--font-mono); font-size: 0.85rem; display: flex; align-items: center;">Page 1 of 19</span>
-          <button class="btn btn-outline" onclick="nextPdfPage()">Next Page ▶</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Export Studio Modal (Printable PDF Portfolio & QR Studio) -->
   <div class="modal-backdrop" id="exportStudioModal">

@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initRocketStages();
   initFilters();
   initThemeToggle();
-  initPdfModal();
   initExportStudio();
   initSmoothScroll();
 });
@@ -259,7 +258,6 @@ function closeLightbox() {
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeLightbox();
-    closePdfDocModal();
     closeExportStudioModal();
   }
 });
@@ -272,79 +270,6 @@ if (lightboxModalEl) {
   });
 }
 
-/* ==========================================================================
-   6. PDF ORIGINAL DOCUMENT VIEWER (19 Pages Inspector)
-   ========================================================================== */
-let currentPdfPage = 1;
-const totalPdfPages = 19;
-
-function initPdfModal() {
-  const btn = document.getElementById('pdfViewerBtn');
-  const select = document.getElementById('pageSelect');
-
-  if (select) {
-    select.innerHTML = '';
-    for (let i = 1; i <= totalPdfPages; i++) {
-      const opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = `Page ${i} of ${totalPdfPages}`;
-      select.appendChild(opt);
-    }
-  }
-
-  if (btn) {
-    btn.addEventListener('click', () => {
-      openPdfDocModal();
-    });
-  }
-
-  const modal = document.getElementById('pdfDocModal');
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closePdfDocModal();
-    });
-  }
-}
-
-function openPdfDocModal() {
-  const modal = document.getElementById('pdfDocModal');
-  if (modal) modal.classList.add('open');
-  updatePdfPageDisplay();
-}
-
-function closePdfDocModal() {
-  const modal = document.getElementById('pdfDocModal');
-  if (modal) modal.classList.remove('open');
-}
-
-function changePdfPage(val) {
-  currentPdfPage = parseInt(val);
-  updatePdfPageDisplay();
-}
-
-function prevPdfPage() {
-  if (currentPdfPage > 1) {
-    currentPdfPage--;
-    updatePdfPageDisplay();
-  }
-}
-
-function nextPdfPage() {
-  if (currentPdfPage < totalPdfPages) {
-    currentPdfPage++;
-    updatePdfPageDisplay();
-  }
-}
-
-function updatePdfPageDisplay() {
-  const img = document.getElementById('pdfPageDisplayImg');
-  const select = document.getElementById('pageSelect');
-  const indicator = document.getElementById('pageNumberIndicator');
-
-  if (img) img.src = `assets/pages/page_${currentPdfPage}.png`;
-  if (select) select.value = currentPdfPage;
-  if (indicator) indicator.textContent = `Page ${currentPdfPage} of ${totalPdfPages}`;
-}
 
 /* ==========================================================================
    7. THEME TOGGLE (Dark Blueprint / Clean Light)
